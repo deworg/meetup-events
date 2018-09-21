@@ -142,8 +142,6 @@ class Plugin {
 
 		// Add meta values to the REST API response.
 		\add_filter( 'rest_prepare_meetup-events', [ $this, 'rest_prepare_meetup_events' ], 10, 2 );
-
-		//\add_action( 'init', [ $this, 'meetup_daily_cron'] );
 	}
 	
 	public function daily_cron_activation() {
@@ -210,13 +208,13 @@ class Plugin {
 	 * Run the daily cron.
 	 */
 	public function meetup_daily_cron() {
-		foreach ( self::$meetup_slugs as $slug => $urlname ) {
+		foreach ( self::$meetup_slugs as $slug => $data ) {
 			// Create Meetup group term if not exists.
 			if ( null === \term_exists( $slug, 'meetup-group' ) ) {
-				\wp_insert_term( $slug, 'meetup-group' );
+				\wp_insert_term( $data['name'], 'meetup-group', [ 'slug' => $slug ] );
 			}
 
-			$events = $this->get_meetup_events( $urlname );
+			$events = $this->get_meetup_events( $data['slug'] );
 
 			// Check if there was no error with getting the events.
 			if ( $events !== false ) {
@@ -252,9 +250,9 @@ class Plugin {
 						'post_status' => 'publish',
 						'post_type'   => 'meetup-events',
 						'meta_input'  => [
-							'meetup_events_date' => \date( 'd.m.Y', \strtotime( $event->local_date ) ),
-							'meetup_events_time' => $event->local_time,
-							'meetup_events_url'  => $event->link,
+							'meetup_event_date' => \date( 'd.m.Y', \strtotime( $event->local_date ) ),
+							'meetup_event_time' => $event->local_time,
+							'meetup_event_url'  => $event->link,
 						],
 						'tax_input'   => [
 							'meetup-group' => $slug,
