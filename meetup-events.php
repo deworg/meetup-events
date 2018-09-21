@@ -29,3 +29,4 @@ if ( ! defined( 'WPINC' ) ) {
 $plugin = new Plugin();
 // Init the plugin.
 $plugin->init();
+$plugin->set_plugin_file( __FILE__ );
