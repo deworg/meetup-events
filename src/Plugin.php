@@ -25,7 +25,26 @@ class Plugin {
 	 */
 	private static $meetup_slugs = [
 		'aachen-wordpress-meetup',
+		'berlin-wordpress-meetup',
+		'wordpress-bern',
+		'wordpress-meetup-bonn-wpbn',
+		'bremen-wordpress-meetup-group',
+		'dusseldorf-wordpress-meetup',
+		'eifel-wordpress-meetup',
+		'wpmeetup-frankfurt',
+		'freiburg-im-breisgau-wordpress-meetup',
+		'hamburg-wordpress-meetup',
+		'hannover-wordpress-meetup',
+		'wordpress-meetup-koblenz',
+		'leipzig-wordpress-meetup',
+		'munchen-wordpress-meetup',
+		'nurnberg-wordpress-meetup',
+		'wpmeetup-osnabrueck',
+		'wp-meetup-paderborn',
+		'wpmeetup-potsdam',
+		'wordpress-meetup-saarland',
 		'wpmeetup-stuttgart',
+		'wordpress-meetup-region-38',
 	];
 	
 	/**
