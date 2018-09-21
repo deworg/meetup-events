@@ -216,12 +216,14 @@ class Plugin {
 	 *
 	 * @param \WP_REST_Response $data Response data object.
 	 * @param \WP_Post $post Post object.
+	 * @param \WP_Post          $post Post object.
 	 *
 	 * @return \WP_REST_Response
 	 */
 	public function rest_prepare_meetup_events( $data, $post ) {
-		$date = \get_post_meta( $post->ID, 'meetup_events_date', true );
-		$time = \get_post_meta( $post->ID, 'meetup_events_time', true );
+		$date = \get_post_meta( $post->ID, 'meetup_event_date', true );
+		$time = \get_post_meta( $post->ID, 'meetup_event_time', true );
+		$url = \get_post_meta( $post->ID, 'meetup_event_url', true );
 
 		if ( $date ) {
 			$data->data['meetup_date'] = $date;
@@ -229,6 +231,10 @@ class Plugin {
 
 		if ( $time ) {
 			$data->data['meetup_time'] = $time;
+		}
+
+		if ( $url ) {
+			$data->data['meetup_url'] = $url;
 		}
 
 		return $data;
