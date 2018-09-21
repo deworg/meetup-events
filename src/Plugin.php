@@ -24,29 +24,98 @@ class Plugin {
 	 * @var		array The slugs of meetups at Meetup.com
 	 */
 	private static $meetup_slugs = [
-		'aachen'      => 'aachen-wordpress-meetup',
-		'berlin'      => 'berlin-wordpress-meetup',
-		'bern'        => 'wordpress-bern',
-		'bonn'        => 'wordpress-meetup-bonn-wpbn',
-		'bremen'      => 'bremen-wordpress-meetup-group',
-		'duesseldorf' => 'dusseldorf-wordpress-meetup',
-		'eifel'       => 'eifel-wordpress-meetup',
-		'frankfurt'   => 'wpmeetup-frankfurt',
-		'freiburg'    => 'freiburg-im-breisgau-wordpress-meetup',
-		'hamburg'     => 'hamburg-wordpress-meetup',
-		'hannover'    => 'hannover-wordpress-meetup',
-		'koblenz'     => 'wordpress-meetup-koblenz',
-		'leipzig'     => 'leipzig-wordpress-meetup',
-		'muenchen'    => 'munchen-wordpress-meetup',
-		'nuernberg'   => 'nurnberg-wordpress-meetup',
-		'osnabrueck'  => 'wpmeetup-osnabrueck',
-		'paderborn'   => 'wp-meetup-paderborn',
-		'potsdam'     => 'wpmeetup-potsdam',
-		'saarland'    => 'wordpress-meetup-saarland',
-		'stuttgart'   => 'wpmeetup-stuttgart',
-		'wolfsburg'   => 'wordpress-meetup-region-38',
-		'fulda'       => 'wordpress-weetup-fulda',
-		'rostock'     => 'wordpress-weetup-rostock',
+		'aachen'      => [
+			'name' => 'WP Meetup Aachen',
+			'slug' => 'aachen-wordpress-meetup',
+		],
+		'berlin'      => [
+			'name' => 'WP Meetup Berlin',
+			'slug' => 'berlin-wordpress-meetup',
+		],
+		'bern'        => [
+			'name' => 'WP Meetup Bern',
+			'slug' => 'wordpress-bern',
+		],
+		'bonn'        => [
+			'name' => 'WP Meetup Bonn',
+			'slug' => 'wordpress-meetup-bonn-wpbn',
+		],
+		'bremen'      => [
+			'name' => 'WP Meetup Bremen',
+			'slug' => 'bremen-wordpress-meetup-group',
+		],
+		'duesseldorf' => [
+			'name' => 'WP Meetup Düsseldorf',
+			'slug' => 'dusseldorf-wordpress-meetup',
+		],
+		'eifel'       => [
+			'name' => 'WP Meetup Eifel',
+			'slug' => 'eifel-wordpress-meetup',
+		],
+		'frankfurt'   => [
+			'name' => 'WP Meetup Frankfurt',
+			'slug' => 'wpmeetup-frankfurt',
+		],
+		'freiburg'    => [
+			'name' => 'WP Meetup Freiburg im Breisgau',
+			'slug' => 'freiburg-im-breisgau-wordpress-meetup',
+		],
+		'hamburg'     => [
+			'name' => 'WP Meetup Hamburg',
+			'slug' => 'hamburg-wordpress-meetup',
+		],
+		'hannover'    => [
+			'name' => 'WP Meetup Hannover',
+			'slug' => 'hannover-wordpress-meetup',
+		],
+		'koblenz'     => [
+			'name' => 'WP Meetup Koblenz',
+			'slug' => 'wordpress-meetup-koblenz',
+		],
+		'leipzig'     => [
+			'name' => 'WP Meetup Leipzig',
+			'slug' => 'leipzig-wordpress-meetup',
+		],
+		'muenchen'    => [
+			'name' => 'WP Meetup München',
+			'slug' => 'munchen-wordpress-meetup',
+		],
+		'nuernberg'   => [
+			'name' => 'WP Meetup Nürnberg',
+			'slug' => 'nurnberg-wordpress-meetup',
+		],
+		'osnabrueck'  => [
+			'name' => 'WP Meetup Osnabrück/Münster',
+			'slug' => 'wpmeetup-osnabrueck',
+		],
+		'paderborn'   => [
+			'name' => 'WP Meetup Paderborn',
+			'slug' => 'wp-meetup-paderborn',
+		],
+		'potsdam'     => [
+			'name' => 'WP Meetup Potsdam',
+			'slug' => 'wpmeetup-potsdam',
+		],
+		'saarland'    => [
+			'name' => 'WP Meetup Saarland',
+			'slug' => 'wordpress-meetup-saarland',
+		],
+		'stuttgart'   => [
+			'name' => 'WP Meetup Stuttgart',
+			'slug' => 'wpmeetup-stuttgart',
+		],
+		'wolfsburg'   => [
+			'name' => 'WP Meetup Region Braunschweig–Wolfsburg',
+			'slug' => 'wordpress-meetup-region-38',
+		],
+		'fulda'       => [
+			'name' => 'WP Meetup Fulda',
+			'slug' => 'wordpress-weetup-fulda',
+		],
+		'rostock'     => [
+			'name' => 'WP Meetup Rostock',
+			'slug' => 'wordpress-weetup-rostock',
+		],
 	];
 	
 	/**
@@ -116,6 +185,9 @@ class Plugin {
 			
 			return false;
 		}
+		
+		// remove duplicates
+		$json = \array_unique( $json, \SORT_REGULAR );
 		
 		return $json;
 	}
