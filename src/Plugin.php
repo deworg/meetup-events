@@ -141,7 +141,7 @@ class Plugin {
 		\add_action( 'init', [ $this, 'register_taxonomy' ] );
 
 		// Add meta values to the REST API response.
-		\add_filter( 'rest_prepare_meetup-events', [ $this, 'rest_prepare_meetup_events' ], 10, 2 );
+		\add_filter( 'rest_prepare_events', [ $this, 'rest_prepare_meetup_events' ], 10, 2 );
 	}
 	
 	public function daily_cron_activation() {
@@ -220,7 +220,7 @@ class Plugin {
 			if ( $events !== false ) {
 				// Remove the existing posts.
 				$posts_args = [
-					'post_type'              => 'meetup-events',
+					'post_type'              => 'events',
 					'no_found_rows'          => true,
 					'update_post_meta_cache' => false,
 					'update_post_term_cache' => false,
@@ -248,7 +248,7 @@ class Plugin {
 					$post_args = [
 						'post_title'  => $event->name,
 						'post_status' => 'publish',
-						'post_type'   => 'meetup-events',
+						'post_type'   => 'events',
 						'meta_input'  => [
 							'meetup_event_date' => \date( 'd.m.Y', \strtotime( $event->local_date ) ),
 							'meetup_event_time' => $event->local_time,
@@ -273,22 +273,21 @@ class Plugin {
 	 */
 	public function register_post_type() {
 		$post_type_args = [
-			'labels'       => [
+			'labels'             => [
 				'name'          => \esc_html__( 'Meetup events', 'meetup-events' ),
 				'singular_name' => \esc_html__( 'Meetup event', 'meetup-events' ),
 				'menu_name'     => \esc_html__( 'Meetup events', 'meetup-events' ),
 			],
-			'public'       => true,
-			'show_in_rest' => true,
-			'rewrite'      => [
-				'slug' => 'event',
-			],
-			'supports'     => [
+			'public'             => false,
+			'publicly_queryable' => true,
+			'show_in_rest'       => true,
+			'supports'           => [
 				'title',
 			],
+			'rest_base'          => 'events',
 		];
 
-		\register_post_type( 'meetup-events', $post_type_args );
+		\register_post_type( 'events', $post_type_args );
 	}
 
 	/**
@@ -296,7 +295,7 @@ class Plugin {
 	 */
 	public function register_post_meta() {
 		\register_post_meta(
-			'meetup-events',
+			'events',
 			'meetup_event_date',
 			[
 				'type'         => 'string',
@@ -307,7 +306,7 @@ class Plugin {
 		);
 
 		\register_post_meta(
-			'meetup-events',
+			'events',
 			'meetup_event_time',
 			[
 				'type'         => 'string',
@@ -318,7 +317,7 @@ class Plugin {
 		);
 
 		\register_post_meta(
-			'meetup-events',
+			'events',
 			'meetup_event_url',
 			[
 				'type'         => 'string',
@@ -345,7 +344,7 @@ class Plugin {
 			'show_in_rest' => true,
 		];
 
-		\register_taxonomy( 'meetup-group', 'meetup-events', $taxonomy_args );
+		\register_taxonomy( 'meetup-group', 'events', $taxonomy_args );
 	}
 
 	/**
