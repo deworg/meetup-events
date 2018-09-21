@@ -171,22 +171,33 @@ class Plugin {
 	public function register_post_meta() {
 		\register_post_meta(
 			'meetup-events',
-			'meetup_events_date',
+			'meetup_event_date',
 			[
-				'type' => 'string',
-				'description' => \esc_html__( 'The date of the meetup.', 'meetup-events' ),
-				'single' => true,
+				'type'         => 'string',
+				'description'  => \esc_html__( 'The date of the meetup.', 'meetup-events' ),
+				'single'       => true,
 				'show_in_rest' => true,
 			]
 		);
 
 		\register_post_meta(
 			'meetup-events',
-			'meetup_events_time',
+			'meetup_event_time',
 			[
-				'type' => 'string',
-				'description' => \esc_html__( 'Start time of the meetup.', 'meetup-events' ),
-				'single' => true,
+				'type'         => 'string',
+				'description'  => \esc_html__( 'Start time of event.', 'meetup-events' ),
+				'single'       => true,
+				'show_in_rest' => true,
+			]
+		);
+
+		\register_post_meta(
+			'meetup-events',
+			'meetup_event_url',
+			[
+				'type'         => 'string',
+				'description'  => \esc_html__( 'URL of event.', 'meetup-events' ),
+				'single'       => true,
 				'show_in_rest' => true,
 			]
 		);
