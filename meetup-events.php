@@ -12,7 +12,7 @@
  * Author:      Matthias Kittsteiner, Florian Brinkmann
  * Author URI:  https://florianbrinkmann.com/en/
  * License:     GPL v2 http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
- * Text Domain: lazy-loading-responsive-images
+ * Text Domain: meetup-events
  */
 namespace deworg\MeetupEvents;
 

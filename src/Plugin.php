@@ -1,14 +1,14 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Florian
- * Date: 21.09.2018
- * Time: 11:52
+ * Main class file.
  */
 
 namespace deworg\MeetupEvents;
 
-
+/**
+ * Class Plugin
+ * @package deworg\MeetupEvents
+ */
 class Plugin {
 	/**
 	 * @var		string The URL to the Meetup.com API
@@ -28,12 +28,21 @@ class Plugin {
 		'wpmeetup-stuttgart',
 	];
 	
+	/**
+	 * Plugin constructor.
+	 */
 	public function __construct() {
 	}
 
+	/**
+	 * Init function.
+	 */
 	public function init() {
 		\register_activation_hook( $this->plugin_file, 'daily_cron_activation' );
 		\register_deactivation_hook( $this->plugin_file, 'daily_cron_deactivation' );
+		
+		// Register the post type.
+		add_action( 'init', [ $this, 'register_post_type' ] );
 	}
 	
 	public function daily_cron_activation() {
@@ -103,6 +112,29 @@ class Plugin {
 			// prevent rate limit
 			\sleep( 1 );
 		}
+	}
+
+	/**
+	 * Register the post type.
+	 */
+	public function register_post_type() {
+		$post_type_args = [
+			'labels'       => [
+				'name'          => esc_html__( 'Meetup events', 'meetup-events' ),
+				'singular_name' => esc_html__( 'Meetup event', 'meetup-events' ),
+				'menu_name'     => esc_html__( 'Meetup events', 'meetup-events' ),
+			],
+			'public'       => true,
+			'show_in_rest' => true,
+			'rewrite'      => [
+				'slug' => 'event',
+			],
+			'supports'     => [
+				'title',
+			],
+		];
+
+		register_post_type( 'meetup-events', $post_type_args );
 	}
 	
 	/**
