@@ -61,7 +61,7 @@ class Plugin {
 	public function init() {
 		\register_activation_hook( $this->plugin_file, 'daily_cron_activation' );
 		\register_deactivation_hook( $this->plugin_file, 'daily_cron_deactivation' );
-		
+
 		// Register the post type.
 		\add_action( 'init', [ $this, 'register_post_type' ] );
 
@@ -73,6 +73,8 @@ class Plugin {
 
 		// Add meta values to the REST API response.
 		\add_filter( 'rest_prepare_meetup-events', [ $this, 'rest_prepare_meetup_events' ], 10, 2 );
+
+		//\add_action( 'init', [ $this, 'meetup_daily_cron'] );
 	}
 	
 	public function daily_cron_activation() {
@@ -137,18 +139,60 @@ class Plugin {
 	 */
 	public function meetup_daily_cron() {
 		foreach ( self::$meetup_slugs as $slug => $urlname ) {
+			// Create Meetup group term if not exists.
+			if ( null === \term_exists( $slug, 'meetup-group' ) ) {
+				\wp_insert_term( $slug, 'meetup-group' );
+			}
+
 			$events = $this->get_meetup_events( $urlname );
 
 			// Check if there was no error with getting the events.
 			if ( $events !== false ) {
+				// Remove the existing posts.
+				$posts_args = [
+					'post_type'              => 'meetup-events',
+					'no_found_rows'          => true,
+					'update_post_meta_cache' => false,
+					'update_post_term_cache' => false,
+					'fields'                 => 'ids',
+					'posts_per_page'         => 500,
+					'tax_query' => [
+						[
+							'taxonomy' => 'meetup-group',
+							'field'    => 'slug',
+							'terms'    => $slug,
+						],
+					],
+				];
+
+				$existing_events = new \WP_Query( $posts_args );
+
+				if ( $existing_events->have_posts() ) {
+					foreach ( $existing_events->posts as $existing_event ) {
+						\wp_delete_post( $existing_event );
+					}
+				}
+
 				// Add posts.
 				foreach ( $events as $event ) {
-						'post_title' => $event->name,
+					$post_args = [
+						'post_title'  => $event->name,
 						'post_status' => 'publish',
-							'meetup_events_date' => date( 'd.m.Y', strtotime( $event->local_date ) ),
+						'post_type'   => 'meetup-events',
+						'meta_input'  => [
+							'meetup_events_date' => \date( 'd.m.Y', \strtotime( $event->local_date ) ),
 							'meetup_events_time' => $event->local_time,
+							'meetup_events_url'  => $event->link,
+						],
+						'tax_input'   => [
+							'meetup-group' => $slug,
+						],
+					];
+
+					\wp_insert_post( $post_args );
 				}
 			}
+
 			// prevent rate limit
 			\sleep( 1 );
 		}
