@@ -45,6 +45,8 @@ class Plugin {
 		'wordpress-meetup-saarland',
 		'wpmeetup-stuttgart',
 		'wordpress-meetup-region-38',
+		'wordpress-weetup-fulda',
+		'wordpress-weetup-rostock',
 	];
 	
 	/**
