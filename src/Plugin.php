@@ -24,27 +24,29 @@ class Plugin {
 	 * @var		array The slugs of meetups at Meetup.com
 	 */
 	private static $meetup_slugs = [
-		'aachen-wordpress-meetup',
-		'berlin-wordpress-meetup',
-		'wordpress-bern',
-		'wordpress-meetup-bonn-wpbn',
-		'bremen-wordpress-meetup-group',
-		'dusseldorf-wordpress-meetup',
-		'eifel-wordpress-meetup',
-		'wpmeetup-frankfurt',
-		'freiburg-im-breisgau-wordpress-meetup',
-		'hamburg-wordpress-meetup',
-		'hannover-wordpress-meetup',
-		'wordpress-meetup-koblenz',
-		'leipzig-wordpress-meetup',
-		'munchen-wordpress-meetup',
-		'nurnberg-wordpress-meetup',
-		'wpmeetup-osnabrueck',
-		'wp-meetup-paderborn',
-		'wpmeetup-potsdam',
-		'wordpress-meetup-saarland',
-		'wpmeetup-stuttgart',
-		'wordpress-meetup-region-38',
+		'aachen'      => 'aachen-wordpress-meetup',
+		'berlin'      => 'berlin-wordpress-meetup',
+		'bern'        => 'wordpress-bern',
+		'bonn'        => 'wordpress-meetup-bonn-wpbn',
+		'bremen'      => 'bremen-wordpress-meetup-group',
+		'duesseldorf' => 'dusseldorf-wordpress-meetup',
+		'eifel'       => 'eifel-wordpress-meetup',
+		'frankfurt'   => 'wpmeetup-frankfurt',
+		'freiburg'    => 'freiburg-im-breisgau-wordpress-meetup',
+		'hamburg'     => 'hamburg-wordpress-meetup',
+		'hannover'    => 'hannover-wordpress-meetup',
+		'koblenz'     => 'wordpress-meetup-koblenz',
+		'leipzig'     => 'leipzig-wordpress-meetup',
+		'muenchen'    => 'munchen-wordpress-meetup',
+		'nuernberg'   => 'nurnberg-wordpress-meetup',
+		'osnabrueck'  => 'wpmeetup-osnabrueck',
+		'paderborn'   => 'wp-meetup-paderborn',
+		'potsdam'     => 'wpmeetup-potsdam',
+		'saarland'    => 'wordpress-meetup-saarland',
+		'stuttgart'   => 'wpmeetup-stuttgart',
+		'wolfsburg'   => 'wordpress-meetup-region-38',
+		'fulda'       => 'wordpress-weetup-fulda',
+		'rostock'     => 'wordpress-weetup-rostock',
 	];
 	
 	/**
@@ -134,8 +136,8 @@ class Plugin {
 	 * Run the daily cron.
 	 */
 	public function meetup_daily_cron() {
-		foreach ( self::$meetup_slugs as $slug ) {
-			$events = $this->get_meetup_events( $slug );
+		foreach ( self::$meetup_slugs as $slug => $urlname ) {
+			$events = $this->get_meetup_events( $urlname );
 
 			// Check if there was no error with getting the events.
 			if ( $events !== false ) {
