@@ -64,7 +64,10 @@ class Plugin {
 		\add_action( 'init', [ $this, 'register_post_type' ] );
 
 		// Register the post meta.
-		\add_action( 'init', [ $this, 'register_post_meta' ], 900 );
+		\add_action( 'init', [ $this, 'register_post_meta' ] );
+
+		// Register the post meta.
+		\add_action( 'init', [ $this, 'register_taxonomy' ] );
 
 		// Add meta values to the REST API response.
 		\add_filter( 'rest_prepare_meetup-events', [ $this, 'rest_prepare_meetup_events' ], 10, 2 );
@@ -187,6 +190,25 @@ class Plugin {
 				'show_in_rest' => true,
 			]
 		);
+	}
+
+	/**
+	 * Register custom taxonomy.
+	 */
+	public function register_taxonomy() {
+		$taxonomy_args = [
+			'labels' => [
+				'name' => esc_html__( 'Meetup groups', 'meetup-events' ),
+				'singular_name' => esc_html__( 'Meetup group', 'meetup-events' ),
+			],
+			'public' => true,
+			'rewrite' => [
+				'slug' => 'group',
+			],
+			'show_in_rest' => true,
+		];
+
+		\register_taxonomy( 'meetup-group', 'meetup-events', $taxonomy_args );
 	}
 
 	/**
