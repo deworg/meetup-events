@@ -136,7 +136,17 @@ class Plugin {
 	public function meetup_daily_cron() {
 		foreach ( self::$meetup_slugs as $slug ) {
 			$events = $this->get_meetup_events( $slug );
-			
+
+			// Check if there was no error with getting the events.
+			if ( $events !== false ) {
+				// Add posts.
+				foreach ( $events as $event ) {
+						'post_title' => $event->name,
+						'post_status' => 'publish',
+							'meetup_events_date' => date( 'd.m.Y', strtotime( $event->local_date ) ),
+							'meetup_events_time' => $event->local_time,
+				}
+			}
 			// prevent rate limit
 			\sleep( 1 );
 		}
