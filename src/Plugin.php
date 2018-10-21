@@ -279,6 +279,7 @@ class Plugin {
 				'menu_name'     => \esc_html__( 'Meetup events', 'meetup-events' ),
 			],
 			'public'             => false,
+			'show_ui'            => true,
 			'publicly_queryable' => true,
 			'show_in_rest'       => true,
 			'supports'           => [
