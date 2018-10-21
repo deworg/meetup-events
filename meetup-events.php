@@ -16,14 +16,8 @@
  */
 namespace deworg\MeetupEvents;
 
-// Load Composer autoloader. From https://github.com/brightnucleus/jasper-client/blob/master/tests/bootstrap.php#L55-L59
-$autoloader = dirname( __FILE__ ) . '/vendor/autoload.php';
-if ( is_readable( $autoloader ) ) {
-	require_once $autoloader;
-}
-if ( ! defined( 'WPINC' ) ) {
-	die;
-}
+// Load class file.
+require_once dirname( __FILE__ ) . '/src/Plugin.php';
 
 // Create object.
 $plugin = new Plugin();
