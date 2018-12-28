@@ -21,6 +21,6 @@ require_once dirname( __FILE__ ) . '/src/Plugin.php';
 
 // Create object.
 $plugin = new Plugin();
+$plugin->set_plugin_file( __FILE__ );
 // Init the plugin.
 $plugin->init();
-$plugin->set_plugin_file( __FILE__ );

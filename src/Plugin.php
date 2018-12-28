@@ -128,8 +128,11 @@ class Plugin {
 	 * Init function.
 	 */
 	public function init() {
-		\register_activation_hook( $this->plugin_file, 'daily_cron_activation' );
-		\register_deactivation_hook( $this->plugin_file, 'daily_cron_deactivation' );
+		// Create cron hook.
+		\add_action( 'meetup_daily_cron_hook', [ $this, 'meetup_daily_cron' ] );
+
+		\register_activation_hook( $this->plugin_file, [ $this, 'daily_cron_activation' ] );
+		\register_deactivation_hook( $this->plugin_file, [ $this, 'daily_cron_deactivation' ] );
 
 		// Register the post type.
 		\add_action( 'init', [ $this, 'register_post_type' ] );
@@ -145,14 +148,14 @@ class Plugin {
 	}
 	
 	public function daily_cron_activation() {
-		if ( ! \wp_next_scheduled( [ $this, 'meetup_daily_cron' ] ) ) {
-			\wp_schedule_event( time(), 'daily', [ $this, 'meetup_daily_cron' ] );
+		if ( ! \wp_next_scheduled( 'meetup_daily_cron_hook' ) ) {
+			\wp_schedule_event( time(), 'daily', 'meetup_daily_cron_hook' );
 		}
 	}
 	
 	public function daily_cron_deactivation() {
-		if ( \wp_next_scheduled( [ $this, 'meetup_daily_cron' ] ) ) {
-			\wp_clear_scheduled_hook( [ $this, 'meetup_daily_cron' ] );
+		if ( \wp_next_scheduled( 'meetup_daily_cron_hook' ) ) {
+			\wp_clear_scheduled_hook( 'meetup_daily_cron_hook' );
 		}
 	}
 	
