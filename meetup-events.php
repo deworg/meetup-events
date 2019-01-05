@@ -8,11 +8,13 @@
  * @wordpress-plugin
  * Plugin Name: Meetup Events
  * Description: Automatically get all meetup events from Meetup.com for WordPress meetups.
- * Version:     0.1.0
+ * Version:     0.1.1
  * Author:      Matthias Kittsteiner, Florian Brinkmann
  * Author URI:  https://florianbrinkmann.com/en/
  * License:     GPL v3 http://www.gnu.org/licenses/old-licenses/gpl-3.0.html
  * Text Domain: meetup-events
+ * GitHub Plugin URI: https://github.com/deworg/meetup-events
+ * GitHub Branch: master
  */
 namespace deworg\MeetupEvents;
 
