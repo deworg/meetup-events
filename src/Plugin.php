@@ -281,7 +281,6 @@ class Plugin {
 							'meetup-group' => $slug,
 						],
 					];
-					error_log( print_r($event, true) );
 
 					\wp_insert_post( $post_args );
 				}
