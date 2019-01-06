@@ -272,10 +272,10 @@ class Plugin {
 						'post_status' => 'publish',
 						'post_type'   => 'events',
 						'meta_input'  => [
-							'meetup_event_date' => \date( 'd.m.Y', \strtotime( $event->local_date ) ),
-							'meetup_event_time' => $event->local_time,
-							'meetup_event_timestamp' => \strtotime( $event->local_time ),
-							'meetup_event_url'  => $event->link,
+							'meetup_event_date'      => \date( 'd.m.Y', \strtotime( $event->local_date ) ),
+							'meetup_event_time'      => $event->local_time,
+							'meetup_event_timestamp' => \strtotime( $event->local_date ),
+							'meetup_event_url'       => $event->link,
 						],
 						'tax_input'   => [
 							'meetup-group' => $slug,
