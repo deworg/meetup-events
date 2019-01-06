@@ -283,7 +283,7 @@ class Plugin {
 			],
 			'public'             => false,
 			'show_ui'            => true,
-			'publicly_queryable' => true,
+			'publicly_queryable' => false,
 			'show_in_rest'       => true,
 			'supports'           => [
 				'title',
