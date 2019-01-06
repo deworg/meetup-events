@@ -274,13 +274,14 @@ class Plugin {
 						'meta_input'  => [
 							'meetup_event_date'      => \date( 'd.m.Y', \strtotime( $event->local_date ) ),
 							'meetup_event_time'      => $event->local_time,
-							'meetup_event_timestamp' => \strtotime( $event->local_date ),
+							'meetup_event_timestamp' => $event->time,
 							'meetup_event_url'       => $event->link,
 						],
 						'tax_input'   => [
 							'meetup-group' => $slug,
 						],
 					];
+					error_log( print_r($event, true) );
 
 					\wp_insert_post( $post_args );
 				}
