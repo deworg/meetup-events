@@ -255,6 +255,7 @@ class Plugin {
 						'meta_input'  => [
 							'meetup_event_date' => \date( 'd.m.Y', \strtotime( $event->local_date ) ),
 							'meetup_event_time' => $event->local_time,
+							'meetup_event_timestamp' => \strtotime( $event->local_time ),
 							'meetup_event_url'  => $event->link,
 						],
 						'tax_input'   => [
@@ -315,6 +316,17 @@ class Plugin {
 			[
 				'type'         => 'string',
 				'description'  => \esc_html__( 'Start time of event.', 'meetup-events' ),
+				'single'       => true,
+				'show_in_rest' => true,
+			]
+		);
+
+		\register_post_meta(
+			'events',
+			'meetup_event_timestamp',
+			[
+				'type'         => 'integer',
+				'description'  => \esc_html__( 'Start timestamp of event.', 'meetup-events' ),
 				'single'       => true,
 				'show_in_rest' => true,
 			]
