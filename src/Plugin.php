@@ -160,6 +160,23 @@ class Plugin {
 	}
 	
 	/**
+	 * Delete all meetup events including their post meta.
+	 * 
+	 * Run this only in cron mode as it may take a while.
+	 */
+	private function delete_meetup_events() {
+		global $wpdb;
+		
+		// delete all posts by post type.
+		$sql = "DELETE		post,
+    						meta
+				FROM		" . $wpdb->prefix . "posts AS post
+				LEFT JOIN	" . $wpdb->prefix . "postmeta AS meta ON meta.post_id = post.ID
+				WHERE		post.post_type = 'events'";
+		$result = $wpdb->query( $sql );
+	}
+	
+	/**
 	 * Get all events from a meetup at Meetup.com.
 	 * 
 	 * @param	string		$urlname The slug of the meetup at Meetup.com
@@ -211,6 +228,8 @@ class Plugin {
 	 * Run the daily cron.
 	 */
 	public function meetup_daily_cron() {
+		$this->delete_meetup_events();
+		
 		foreach ( self::$meetup_slugs as $slug => $data ) {
 			// Create Meetup group term if not exists.
 			if ( null === \term_exists( $slug, 'meetup-group' ) ) {
