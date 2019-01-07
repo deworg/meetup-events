@@ -110,11 +110,11 @@ class Plugin {
 		],
 		'fulda'       => [
 			'name' => 'WP Meetup Fulda',
-			'slug' => 'wordpress-weetup-fulda',
+			'slug' => 'wordpress-meetup-fulda',
 		],
 		'rostock'     => [
 			'name' => 'WP Meetup Rostock',
-			'slug' => 'wordpress-weetup-rostock',
+			'slug' => 'wordpress-meetup-rostock',
 		],
 	];
 	
