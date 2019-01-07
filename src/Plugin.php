@@ -44,6 +44,10 @@ class Plugin {
 			'name' => 'WP Meetup Bremen',
 			'slug' => 'bremen-wordpress-meetup-group',
 		],
+		'dortmund' => [
+			'name' => 'WP Meetup Dortmund',
+			'slug' => 'wordpress-meetup-dortmund',
+		],
 		'duesseldorf' => [
 			'name' => 'WP Meetup Düsseldorf',
 			'slug' => 'dusseldorf-wordpress-meetup',
@@ -68,6 +72,18 @@ class Plugin {
 			'name' => 'WP Meetup Hannover',
 			'slug' => 'hannover-wordpress-meetup',
 		],
+		'heidelberg'     => [
+			'name' => 'WP Meetup Heidelberg',
+			'slug' => 'wordpress-heidelberg',
+		],
+		'kassel'     => [
+			'name' => 'WP Meetup Kassel',
+			'slug' => 'wordpress-meetup-kassel',
+		],
+		'kiel'     => [
+			'name' => 'WP Meetup Kiel',
+			'slug' => 'wordpress-meetup-kiel',
+		],
 		'koblenz'     => [
 			'name' => 'WP Meetup Koblenz',
 			'slug' => 'wordpress-meetup-koblenz',
@@ -76,9 +92,17 @@ class Plugin {
 			'name' => 'WP Meetup Leipzig',
 			'slug' => 'leipzig-wordpress-meetup',
 		],
+		'mannheim'    => [
+			'name' => 'WP Meetup Mannheim',
+			'slug' => 'wordpress-mannheim',
+		],
 		'muenchen'    => [
 			'name' => 'WP Meetup München',
 			'slug' => 'munchen-wordpress-meetup',
+		],
+		'neustadt'   => [
+			'name' => 'WP Meetup Neustadt',
+			'slug' => 'wordpress-meetup-neustadt',
 		],
 		'nuernberg'   => [
 			'name' => 'WP Meetup Nürnberg',
