@@ -257,12 +257,15 @@ class Plugin {
 							'meetup_event_time' => $event->local_time,
 							'meetup_event_url'  => $event->link,
 						],
-						'tax_input'   => [
-							'meetup-group' => $slug,
-						],
 					];
 
-					\wp_insert_post( $post_args );
+					$post_id = \wp_insert_post( $post_args );
+
+					// Connect post with meetup group taxonomy.
+					// @link https://developer.wordpress.org/reference/functions/wp_insert_post/#comment-2434.
+					if ( ! \is_wp_error( $post_id ) ) {
+						\wp_set_object_terms( $post_id, $slug, 'meetup-group' );
+					}
 				}
 			}
 
