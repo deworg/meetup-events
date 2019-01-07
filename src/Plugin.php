@@ -149,6 +149,8 @@ class Plugin {
 		// Order events in backend by event timestamp meta.
 		\add_action( 'pre_get_posts', [ $this, 'reorder_events' ] );
 
+		// Show event date as column in the backend posts table.
+		// @link https://wordpress.stackexchange.com/a/19229.
 		\add_filter( 'manage_events_posts_columns', [ $this, 'manage_events_posts_columns' ] );
 		\add_filter( 'manage_events_posts_custom_column', [ $this, 'manage_events_posts_custom_column' ], 10, 2 );
 		\add_filter( 'manage_edit-events_sortable_columns', [ $this, 'manage_edit_events_sortable_columns' ] );
@@ -443,6 +445,8 @@ class Plugin {
 			$query->set('order', 'ASC');
 		}
 
+		// Check if the user sorts by the custom event date column.
+		// @link https://www.smashingmagazine.com/2017/12/customizing-admin-columns-wordpress/.
 		if ( is_admin() && $query->is_main_query() && 'event_date' === $query->get( 'orderby' ) ) {
 			$query->set('meta_key', 'meetup_event_timestamp');
 			$query->set('orderby', 'meta_value_num');
