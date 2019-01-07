@@ -145,6 +145,9 @@ class Plugin {
 
 		// Add meta values to the REST API response.
 		\add_filter( 'rest_prepare_events', [ $this, 'rest_prepare_meetup_events' ], 10, 2 );
+
+		// Order events in backend by event timestamp meta.
+		\add_action( 'pre_get_posts', [ $this, 'reorder_events' ] );
 	}
 	
 	public function daily_cron_activation() {
@@ -412,6 +415,28 @@ class Plugin {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Reorder the events table in the backend so they are orderd by the event timestamp.
+	 * 
+	 * @link https://wordpress.stackexchange.com/a/125513
+	 * @link https://wordpress.stackexchange.com/a/141359
+	 * 
+	 * @param \WP_Query $query The query object.
+	 */
+	public function reorder_events( $query ) {
+		// Check if function exists (does not exist for REST-API views).
+		if ( ! function_exists( 'get_current_screen' ) ) {
+			return;
+		}
+
+		$s = get_current_screen();
+		if ( is_admin() && $s->base === 'edit' && $s->post_type === 'events' && $query->is_main_query() ) {
+			$query->set('meta_key', 'meetup_event_timestamp');
+			$query->set('orderby', 'meta_value_num');
+			$query->set('order', 'ASC');
+		}
 	}
 
 	/**
