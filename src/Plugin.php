@@ -148,6 +148,10 @@ class Plugin {
 
 		// Order events in backend by event timestamp meta.
 		\add_action( 'pre_get_posts', [ $this, 'reorder_events' ] );
+
+		\add_filter( 'manage_events_posts_columns', [ $this, 'manage_events_posts_columns' ] );
+		\add_filter( 'manage_events_posts_custom_column', [ $this, 'manage_events_posts_custom_column' ], 10, 2 );
+		\add_filter( 'manage_edit-events_sortable_columns', [ $this, 'manage_edit_events_sortable_columns' ] );
 	}
 	
 	public function daily_cron_activation() {
@@ -432,11 +436,64 @@ class Plugin {
 		}
 
 		$s = get_current_screen();
-		if ( is_admin() && $s->base === 'edit' && $s->post_type === 'events' && $query->is_main_query() ) {
+
+		if ( is_admin() && $s->base === 'edit' && $s->post_type === 'events' && $query->is_main_query() && 'event_date' !== $query->get( 'orderby' ) ) {
 			$query->set('meta_key', 'meetup_event_timestamp');
 			$query->set('orderby', 'meta_value_num');
 			$query->set('order', 'ASC');
 		}
+
+		if ( is_admin() && $query->is_main_query() && 'event_date' === $query->get( 'orderby' ) ) {
+			$query->set('meta_key', 'meetup_event_timestamp');
+			$query->set('orderby', 'meta_value_num');
+		}
+	}
+
+	/**
+	 * Replace the default date column with custom one.
+	 * 
+	 * @link https://stackoverflow.com/a/3354804
+	 * 
+	 * @param array $columns The post columns.
+	 * 
+	 * @return array $columns The modified columns array.
+	 */
+	public function manage_events_posts_columns( $columns ) {
+		$index = 0;
+		foreach ( $columns as $key => $value ) {
+			if ( $key === 'date' ) {
+				$columns = array_slice( $columns, 0, $index, true ) + [ 'event_date' => __( 'Meetup date', 'meetup-events' ) ] + array_slice( $columns, $index, count( $columns ) - 1, true );
+				break;
+			}
+			$index++;
+		}
+		unset( $columns['date'] );
+
+		return $columns;
+	}
+
+	/**
+	 * Display meetup date in custom column.
+	 *  
+	 * @param array $column_name The column name.
+	 */
+	public function manage_events_posts_custom_column( $column_name, $post_id ) {
+		if ( $column_name === 'event_date' ) {
+			echo \get_post_meta( $post_id, 'meetup_event_date', true );
+		}
+	}
+
+	/**
+	 * Make event date column sortable.
+	 *  
+	 * @param array $columns Array of sortable columns.
+	 * 
+	 * @return array $columns Modified sortable columns array.
+	 */
+	public function manage_edit_events_sortable_columns( $columns ) {
+		$columns['event_date'] = 'event_date';
+
+		return $columns;
 	}
 
 	/**
