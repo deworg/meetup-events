@@ -332,7 +332,7 @@ class Plugin {
 	 */
 	public function register_post_type() {
 		$post_type_args = [
-			'labels'             => [
+			'labels'            => [
 				'name'          => \esc_html__( 'Meetup events', 'meetup-events' ),
 				'singular_name' => \esc_html__( 'Meetup event', 'meetup-events' ),
 				'menu_name'     => \esc_html__( 'Meetup events', 'meetup-events' ),
@@ -490,7 +490,10 @@ class Plugin {
 		$index = 0;
 		foreach ( $columns as $key => $value ) {
 			if ( $key === 'date' ) {
-				$columns = array_slice( $columns, 0, $index, true ) + [ 'event_date' => __( 'Meetup date', 'meetup-events' ) ] + array_slice( $columns, $index, count( $columns ) - 1, true );
+				$columns = 
+					array_slice( $columns, 0, $index, true ) + 
+					[ 'event_date' => __( 'Meetup date', 'meetup-events' ) ] + 
+					array_slice( $columns, $index, count( $columns ) - 1, true );
 				break;
 			}
 			$index++;
