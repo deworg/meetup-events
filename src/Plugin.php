@@ -88,6 +88,10 @@ class Plugin {
 			'name' => 'WP Meetup Koblenz',
 			'slug' => 'wordpress-meetup-koblenz',
 		],
+		'koeln'     => [
+			'name' => 'WP Meetup Köln',
+			'slug' => 'wordpress-meetup-koln',
+		],
 		'leipzig'     => [
 			'name' => 'WP Meetup Leipzig',
 			'slug' => 'leipzig-wordpress-meetup',
