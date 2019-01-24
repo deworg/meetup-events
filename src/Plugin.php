@@ -209,7 +209,8 @@ class Plugin {
     						meta
 				FROM		" . $wpdb->prefix . "posts AS post
 				LEFT JOIN	" . $wpdb->prefix . "postmeta AS meta ON meta.post_id = post.ID
-				WHERE		post.post_type = 'events'";
+				WHERE		post.post_type = 'events'
+				AND			meta.meetup_event_is_system = 1";
 		$result = $wpdb->query( $sql );
 	}
 	
@@ -313,6 +314,7 @@ class Plugin {
 							'meetup_event_time'      => $event->local_time,
 							'meetup_event_timestamp' => $event->time,
 							'meetup_event_url'       => $event->link,
+							'meetup_event_is_system' => 1,
 						],
 					];
 
@@ -347,6 +349,7 @@ class Plugin {
 			'show_in_rest'       => true,
 			'supports'           => [
 				'title',
+				'custom-fields',
 			],
 			'rest_base'          => 'events',
 			// @link https://wordpress.stackexchange.com/a/54962.
