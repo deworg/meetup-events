@@ -210,7 +210,8 @@ class Plugin {
 				FROM		" . $wpdb->prefix . "posts AS post
 				LEFT JOIN	" . $wpdb->prefix . "postmeta AS meta ON meta.post_id = post.ID
 				WHERE		post.post_type = 'events'
-				AND			meta.meetup_event_is_system = 1";
+				AND			meta.meta_value = 1
+				AND			meta.meta_key = 'meetup_event_is_system'";
 		$result = $wpdb->query( $sql );
 	}
 	
