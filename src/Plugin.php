@@ -64,6 +64,10 @@ class Plugin {
 			'name' => 'WP Meetup Freiburg im Breisgau',
 			'slug' => 'freiburg-im-breisgau-wordpress-meetup',
 		],
+		'fulda'       => [
+			'name' => 'WP Meetup Fulda',
+			'slug' => 'wordpress-meetup-fulda',
+		],
 		'hamburg'     => [
 			'name' => 'WP Meetup Hamburg',
 			'slug' => 'hamburg-wordpress-meetup',
@@ -124,6 +128,10 @@ class Plugin {
 			'name' => 'WP Meetup Potsdam',
 			'slug' => 'wpmeetup-potsdam',
 		],
+		'rostock'     => [
+			'name' => 'WP Meetup Rostock',
+			'slug' => 'wordpress-meetup-rostock',
+		],
 		'saarland'    => [
 			'name' => 'WP Meetup Saarland',
 			'slug' => 'wordpress-meetup-saarland',
@@ -136,13 +144,6 @@ class Plugin {
 			'name' => 'WP Meetup Region Braunschweig–Wolfsburg',
 			'slug' => 'wordpress-meetup-region-38',
 		],
-		'fulda'       => [
-			'name' => 'WP Meetup Fulda',
-			'slug' => 'wordpress-meetup-fulda',
-		],
-		'rostock'     => [
-			'name' => 'WP Meetup Rostock',
-			'slug' => 'wordpress-meetup-rostock',
 		],
 	];
 	
