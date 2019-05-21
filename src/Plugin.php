@@ -144,6 +144,9 @@ class Plugin {
 			'name' => 'WP Meetup Region Braunschweig–Wolfsburg',
 			'slug' => 'wordpress-meetup-region-38',
 		],
+		'wuerzburg'   => [
+			'name' => 'WP Meetup Würzburg',
+			'slug' => 'wuerzburg-wordpress-meetup',
 		],
 	];
 	
