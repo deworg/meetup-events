@@ -80,6 +80,10 @@ class Plugin {
 			'name' => 'WP Meetup Heidelberg',
 			'slug' => 'wordpress-heidelberg',
 		],
+		'jena'     => [
+			'name' => 'WP Meetup Jena',
+			'slug' => 'jena-wordpress-meetup',
+		],
 		'kassel'     => [
 			'name' => 'WP Meetup Kassel',
 			'slug' => 'wordpress-meetup-kassel',
