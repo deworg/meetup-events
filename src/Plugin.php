@@ -88,6 +88,10 @@ class Plugin {
 			'name' => 'WP Meetup Jena',
 			'slug' => 'jena-wordpress-meetup',
 		],
+		'karlsruhe'     => [
+			'name' => 'WP Meetup Karlsruhe',
+			'slug' => 'wordpress-meetup-karlsruhe',
+		],
 		'kassel'     => [
 			'name' => 'WP Meetup Kassel',
 			'slug' => 'wordpress-meetup-kassel',
@@ -148,6 +152,10 @@ class Plugin {
 			'name' => 'WP Meetup Stuttgart',
 			'slug' => 'wpmeetup-stuttgart',
 		],
+		'wien'   => [
+			'name' => 'WP Meetup Wien',
+			'slug' => 'vienna-wordpress-meetup',
+		],
 		'wolfsburg'   => [
 			'name' => 'WP Meetup Region Braunschweig–Wolfsburg',
 			'slug' => 'wordpress-meetup-region-38',
@@ -155,6 +163,10 @@ class Plugin {
 		'wuerzburg'   => [
 			'name' => 'WP Meetup Würzburg',
 			'slug' => 'wuerzburg-wordpress-meetup',
+		],
+		'zuerich'   => [
+			'name' => 'WP Meetup Zürich',
+			'slug' => 'wordpress-zurich',
 		],
 	];
 	
