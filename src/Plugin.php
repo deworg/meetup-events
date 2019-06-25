@@ -48,6 +48,10 @@ class Plugin {
 			'name' => 'WP Meetup Dortmund',
 			'slug' => 'wordpress-meetup-dortmund',
 		],
+		'dresden' => [
+			'name' => 'WP Meetup Dresden',
+			'slug' => 'wp-meetup-dresden',
+		],
 		'duesseldorf' => [
 			'name' => 'WP Meetup Düsseldorf',
 			'slug' => 'dusseldorf-wordpress-meetup',
