@@ -132,6 +132,10 @@ class Plugin {
 			'name' => 'WP Meetup Osnabrück/Münster',
 			'slug' => 'wpmeetup-osnabrueck',
 		],
+		'online'  => [
+			'name' => 'WP Online-Meetup Deutschland',
+			'slug' => 'wordpress-online-meetup-deutschland',
+		],
 		'paderborn'   => [
 			'name' => 'WP Meetup Paderborn',
 			'slug' => 'wp-meetup-paderborn',
