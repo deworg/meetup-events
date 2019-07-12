@@ -145,6 +145,10 @@ class Plugin {
 			'slug' => 'wpmeetup-potsdam',
 		],
 		'rostock'     => [
+			'name' => 'WP Meetup Regensburg',
+			'slug' => 'regensburg-wordpress-meetup',
+		],
+		'rostock'     => [
 			'name' => 'WP Meetup Rostock',
 			'slug' => 'wordpress-meetup-rostock',
 		],
