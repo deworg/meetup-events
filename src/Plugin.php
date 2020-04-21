@@ -72,6 +72,10 @@ class Plugin {
 			'name' => 'WP Meetup Fulda',
 			'slug' => 'wordpress-meetup-fulda',
 		],
+		'halle'     => [
+			'name' => 'WP Meetup Halle',
+			'slug' => 'halle-wordpress-meetup',
+		],
 		'hamburg'     => [
 			'name' => 'WP Meetup Hamburg',
 			'slug' => 'hamburg-wordpress-meetup',
